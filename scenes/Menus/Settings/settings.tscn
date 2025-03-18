@@ -1,0 +1,328 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://fonts/Helvetica 700_WhatsApp.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/Menus/Settings/Settings_VBoxContainer.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Menus/Settings/settings.gd" type="Script" id=3]
+[ext_resource path="res://imgs/Untitled81_20230728055503.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Menus/Button_script.gd" type="Script" id=5]
+
+[sub_resource type="AtlasTexture" id=108]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 550, 730, 310, 390 )
+
+[sub_resource type="StyleBoxTexture" id=103]
+texture = SubResource( 108 )
+region_rect = Rect2( 0, 0, 310, 390 )
+
+[sub_resource type="StyleBoxFlat" id=109]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Theme" id=104]
+Button/styles/disabled = SubResource( 109 )
+Button/styles/focus = SubResource( 109 )
+Button/styles/hover = SubResource( 109 )
+Button/styles/normal = SubResource( 109 )
+Button/styles/pressed = SubResource( 109 )
+
+[sub_resource type="AtlasTexture" id=105]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1273, 40, 126, 127 )
+
+[sub_resource type="StyleBoxFlat" id=100]
+bg_color = Color( 0, 0.996078, 0.94902, 1 )
+
+[sub_resource type="StyleBoxFlat" id=101]
+bg_color = Color( 0.00392157, 0.00392157, 0.00392157, 0 )
+border_width_left = 10
+border_color = Color( 0, 0, 0, 0.168627 )
+
+[sub_resource type="Theme" id=98]
+VScrollBar/styles/grabber = SubResource( 100 )
+VScrollBar/styles/scroll = SubResource( 101 )
+
+[sub_resource type="DynamicFont" id=106]
+size = 31
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=107]
+default_font = SubResource( 106 )
+Label/fonts/font = SubResource( 106 )
+
+[node name="Settings" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -195.0
+margin_top = -300.0
+margin_right = 195.0
+margin_bottom = 300.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -408.0
+color = Color( 0, 0, 0, 0.356863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel2" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.356863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel3" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -282.0
+margin_top = -272.0
+margin_right = 283.0
+margin_bottom = 272.0
+custom_styles/panel = SubResource( 103 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_settings" type="Button" parent="Panel3"]
+margin_left = -32.0
+margin_top = -24.0
+margin_right = 94.0
+margin_bottom = 103.0
+theme = SubResource( 104 )
+icon = SubResource( 105 )
+expand_icon = true
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings_ScrollContainer2" type="ScrollContainer" parent="."]
+anchor_right = 1.05641
+anchor_bottom = 1.0
+margin_top = 166.0
+margin_bottom = -166.0
+theme = SubResource( 98 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings_VBoxContainer" type="VBoxContainer" parent="Settings_ScrollContainer2"]
+margin_right = 398.0
+margin_bottom = 176.0
+theme = SubResource( 107 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings_ScrollContainer2/Settings_VBoxContainer"]
+visible = false
+margin_right = 232.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="debug" type="Label" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 154.0
+margin_bottom = 19.0
+text = "player_jump_times_max"
+
+[node name="CheckBox" type="SpinBox" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer"]
+margin_left = 158.0
+margin_right = 232.0
+margin_bottom = 24.0
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="Settings_ScrollContainer2/Settings_VBoxContainer"]
+visible = false
+margin_right = 398.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="debug" type="Label" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer8"]
+margin_top = 9.0
+margin_right = 93.0
+margin_bottom = 41.0
+text = "debug"
+
+[node name="CheckBox2" type="CheckBox" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer8"]
+margin_left = 97.0
+margin_right = 197.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 100, 50 )
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="Settings_ScrollContainer2/Settings_VBoxContainer"]
+margin_right = 398.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="music_vol" type="Label" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer9"]
+margin_right = 152.0
+margin_bottom = 32.0
+text = "music_vol"
+
+[node name="CheckBox" type="HSlider" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer9"]
+margin_left = 156.0
+margin_right = 296.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 140, 0 )
+min_value = -80.0
+max_value = 24.0
+step = 5.0
+rounded = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="value" type="Label" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer9"]
+margin_left = 300.0
+margin_right = 317.0
+margin_bottom = 32.0
+text = "0"
+
+[node name="HBoxContainer12" type="HBoxContainer" parent="Settings_ScrollContainer2/Settings_VBoxContainer"]
+margin_top = 36.0
+margin_right = 398.0
+margin_bottom = 68.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="music_vol" type="Label" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer12"]
+margin_right = 106.0
+margin_bottom = 32.0
+text = "sfx_vol"
+
+[node name="CheckBox" type="HSlider" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer12"]
+margin_left = 110.0
+margin_right = 250.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 140, 0 )
+min_value = -80.0
+max_value = 24.0
+step = 5.0
+rounded = true
+
+[node name="value" type="Label" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer12"]
+margin_left = 254.0
+margin_right = 271.0
+margin_bottom = 32.0
+text = "0"
+
+[node name="HBoxContainer13" type="HBoxContainer" parent="Settings_ScrollContainer2/Settings_VBoxContainer"]
+visible = false
+margin_top = 116.0
+margin_right = 322.0
+margin_bottom = 156.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="landscape" type="Label" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer13"]
+margin_top = 4.0
+margin_right = 151.0
+margin_bottom = 36.0
+text = "landscape"
+
+[node name="CheckBox2" type="CheckBox" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer13"]
+margin_left = 155.0
+margin_right = 179.0
+margin_bottom = 40.0
+
+[node name="HBoxContainer14" type="HBoxContainer" parent="Settings_ScrollContainer2/Settings_VBoxContainer"]
+margin_top = 72.0
+margin_right = 398.0
+margin_bottom = 122.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="show_shoe_trail" type="Label" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer14"]
+margin_top = 9.0
+margin_right = 242.0
+margin_bottom = 41.0
+text = "show_shoe_trail"
+
+[node name="CheckBox2" type="CheckBox" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer14"]
+margin_left = 246.0
+margin_right = 346.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 100, 50 )
+
+[node name="HBoxContainer15" type="HBoxContainer" parent="Settings_ScrollContainer2/Settings_VBoxContainer"]
+margin_top = 126.0
+margin_right = 398.0
+margin_bottom = 176.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="show_color_control" type="Label" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer15"]
+margin_top = 9.0
+margin_right = 294.0
+margin_bottom = 41.0
+text = "show_color_control"
+
+[node name="CheckBox2" type="CheckBox" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer15"]
+margin_left = 298.0
+margin_right = 398.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 100, 50 )
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="Settings_ScrollContainer2/Settings_VBoxContainer"]
+visible = false
+margin_top = 204.0
+margin_right = 317.0
+margin_bottom = 207.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="ColorRect" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer10"]
+margin_right = 150.0
+margin_bottom = 3.0
+rect_min_size = Vector2( 150, 3 )
+mouse_filter = 2
+color = Color( 0.329412, 0.25098, 0.0470588, 1 )
+
+[node name="HBoxContainer11" type="HBoxContainer" parent="Settings_ScrollContainer2/Settings_VBoxContainer"]
+visible = false
+margin_top = 211.0
+margin_right = 321.0
+margin_bottom = 251.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="send_screen_size_scale" type="Label" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer11"]
+margin_top = 4.0
+margin_right = 293.0
+margin_bottom = 36.0
+text = "stop_enemy_spawn"
+
+[node name="CheckBox2" type="CheckBox" parent="Settings_ScrollContainer2/Settings_VBoxContainer/HBoxContainer11"]
+margin_left = 297.0
+margin_right = 321.0
+margin_bottom = 40.0
+
+[connection signal="visibility_changed" from="." to="." method="_on_settings_visibility_changed"]
+[connection signal="visibility_changed" from="Settings_ScrollContainer2/Settings_VBoxContainer" to="Settings_ScrollContainer2/Settings_VBoxContainer" method="_on_Settings_VBoxContainer_visibility_changed"]

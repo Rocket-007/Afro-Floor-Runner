@@ -1,0 +1,383 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://imgs/gradient.png" type="Texture" id=1]
+[ext_resource path="res://imgs/Untitled81_20230728055503.png" type="Texture" id=2]
+[ext_resource path="res://fonts/Peach Days.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/Menus/Button_script.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Menus/MainMenu.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Menus/Settings/settings.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sounds/Shallipopi_-_Sharpiru_Instrumental__africandjspool.com(perfectCut).mp3" type="AudioStream" id=7]
+[ext_resource path="res://scenes/Menus/Guide/guide.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Menus/Info_board/Info_board.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/entities/player/character.tscn" type="PackedScene" id=10]
+[ext_resource path="res://imgs/itch io 64.png" type="Texture" id=11]
+[ext_resource path="res://imgs/youtube-logo-2431.png" type="Texture" id=12]
+[ext_resource path="res://imgs/github-logo-6532.png" type="Texture" id=13]
+
+[sub_resource type="DynamicFont" id=196]
+size = 80
+outline_size = 4
+outline_color = Color( 0.956619, 0.772902, 0.256744, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 56
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=202]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Theme" id=11]
+Button/styles/disabled = SubResource( 202 )
+Button/styles/focus = SubResource( 202 )
+Button/styles/hover = SubResource( 202 )
+Button/styles/normal = SubResource( 202 )
+Button/styles/pressed = SubResource( 202 )
+
+[sub_resource type="AtlasTexture" id=195]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 20, 905, 520, 155 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 500, 1130, 420, 140 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 900, 950, 420, 135 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 1284, 202, 312, 96 )
+
+[sub_resource type="DynamicFont" id=201]
+size = 22
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=197]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("left:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=198]
+resource_name = "highscore"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("left:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.04, 1.04 ) ]
+}
+
+[sub_resource type="Animation" id=199]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.32549, 0.105882, 0.105882, 1 ) ]
+}
+
+[sub_resource type="Animation" id=200]
+resource_name = "gradient"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.32549, 0.105882, 0.105882, 1 ), Color( 0.278431, 0.105882, 0.32549, 1 ) ]
+}
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 0.32549, 0.105882, 0.105882, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="character" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1016, 248 )
+rotation = 3.14159
+scale = Vector2( 0.3, -0.3 )
+
+[node name="AnimationPlayer" parent="character" index="4"]
+autoplay = "run"
+
+[node name="top" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_bottom = -2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="top"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -342.5
+margin_right = 342.5
+margin_bottom = 97.0
+custom_fonts/font = SubResource( 196 )
+text = "AFRO FLOOR RUNNER"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left" type="Control" parent="."]
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 59.0
+margin_right = 366.0
+margin_bottom = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="left"]
+modulate = Color( 1, 0.921569, 0, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -131.0
+margin_top = 88.0
+margin_right = 131.0
+margin_bottom = 156.0
+custom_fonts/font = SubResource( 7 )
+text = "HighScores:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info_board" parent="left" instance=ExtResource( 9 )]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -163.0
+margin_top = 8.0
+margin_right = 163.0
+margin_bottom = 513.0
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -251.0
+margin_top = -294.0
+margin_right = 251.0
+margin_bottom = 296.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="play" type="Button" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -145.0
+margin_top = -48.0
+margin_right = 145.0
+margin_bottom = 48.0
+theme = SubResource( 11 )
+icon = SubResource( 195 )
+expand_icon = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+animated_idle = true
+
+[node name="settings" type="Button" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -168.0
+margin_right = 210.0
+margin_bottom = -72.0
+theme = SubResource( 11 )
+icon = SubResource( 4 )
+expand_icon = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+animated_idle = true
+
+[node name="guide" type="Button" parent="Control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -210.0
+margin_top = -168.0
+margin_right = 80.0
+margin_bottom = -72.0
+theme = SubResource( 11 )
+icon = SubResource( 5 )
+expand_icon = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="Guide" parent="." instance=ExtResource( 8 )]
+visible = false
+script = null
+
+[node name="quit" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -263.0
+margin_top = 72.0
+margin_right = -16.0
+margin_bottom = 200.0
+theme = SubResource( 11 )
+icon = SubResource( 6 )
+expand_icon = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Main_song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
+bus = "Music"
+
+[node name="bottom" type="Control" parent="."]
+anchor_top = 0.871667
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="SocialButt" type="VBoxContainer" parent="bottom"]
+margin_left = 32.0
+margin_top = 8.0
+margin_right = 353.0
+margin_bottom = 72.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="bottom/SocialButt"]
+margin_right = 321.0
+margin_bottom = 64.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="bottom/SocialButt/HBoxContainer"]
+margin_top = 18.0
+margin_right = 113.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 201 )
+text = "ROCKET_007"
+align = 1
+
+[node name="socialB" type="TextureButton" parent="bottom/SocialButt/HBoxContainer"]
+margin_left = 123.0
+margin_right = 180.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 12 )
+texture_hover = ExtResource( 12 )
+texture_disabled = ExtResource( 12 )
+texture_focused = ExtResource( 12 )
+
+[node name="socialB2" type="TextureButton" parent="bottom/SocialButt/HBoxContainer"]
+margin_left = 190.0
+margin_right = 254.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 11 )
+texture_hover = ExtResource( 11 )
+texture_disabled = ExtResource( 11 )
+texture_focused = ExtResource( 11 )
+
+[node name="socialB3" type="TextureButton" parent="bottom/SocialButt/HBoxContainer"]
+margin_left = 264.0
+margin_right = 321.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 13 )
+texture_hover = ExtResource( 13 )
+texture_disabled = ExtResource( 13 )
+texture_focused = ExtResource( 13 )
+
+[node name="AnimationPlayer_highscore" type="AnimationPlayer" parent="."]
+autoplay = "highscore"
+anims/RESET = SubResource( 197 )
+anims/highscore = SubResource( 198 )
+
+[node name="AnimationPlayer_gradient" type="AnimationPlayer" parent="."]
+autoplay = "gradient"
+anims/RESET = SubResource( 199 )
+anims/gradient = SubResource( 200 )
+
+[connection signal="pressed" from="Control/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Control/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/guide" to="." method="_on_guide_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="bottom/SocialButt/HBoxContainer/socialB" to="." method="_on_socialB_pressed"]
+[connection signal="pressed" from="bottom/SocialButt/HBoxContainer/socialB2" to="." method="_on_socialB2_pressed"]
+[connection signal="pressed" from="bottom/SocialButt/HBoxContainer/socialB3" to="." method="_on_socialB3_pressed"]
+
+[editable path="character"]

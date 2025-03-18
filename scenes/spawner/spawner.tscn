@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/spawner/spawner.gd" type="Script" id=1]
+[ext_resource path="res://icon_transparent.png" type="Texture" id=2]
+
+[node name="spawner" type="Node2D"]
+script = ExtResource( 1 )
+use_timer = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Icon" type="Sprite" parent="."]
+scale = Vector2( 0.286667, 0.286667 )
+texture = ExtResource( 2 )
+flip_h = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

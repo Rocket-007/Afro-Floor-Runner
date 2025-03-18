@@ -1,0 +1,681 @@
+[gd_scene load_steps=43 format=2]
+
+[ext_resource path="res://scenes/entities/floor/Floor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/entities/map/EndlessMap.gd" type="Script" id=3]
+[ext_resource path="res://imgs/Untitled81_20230728055503.png" type="Texture" id=4]
+[ext_resource path="res://scenes/spawner/spawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sounds/Shallipopi_-_Sharpiru_Instrumental__africandjspool.com(perfectCut).mp3" type="AudioStream" id=6]
+[ext_resource path="res://scenes/Menus/Button_script.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Menus/Info_board/Info_board.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Menus/Settings/settings.tscn" type="PackedScene" id=9]
+[ext_resource path="res://fonts/Peach Days.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://fonts/Kenney Bold.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://scenes/Menus/UI diaplay/UI_Info_display.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/entities/map/touch_area2D.gd" type="Script" id=13]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+background_canvas_max_layer = 1
+glow_enabled = true
+glow_intensity = 1.3
+glow_strength = 1.32
+glow_blend_mode = 0
+
+[sub_resource type="StyleBoxFlat" id=209]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 5
+border_width_top = 5
+border_width_bottom = 4
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="RectangleShape2D" id=207]
+extents = Vector2( 258, 300 )
+
+[sub_resource type="StyleBoxFlat" id=210]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 4
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="RectangleShape2D" id=208]
+extents = Vector2( 254, 300 )
+
+[sub_resource type="StyleBoxFlat" id=194]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Theme" id=11]
+Button/styles/disabled = SubResource( 194 )
+Button/styles/focus = SubResource( 194 )
+Button/styles/hover = SubResource( 194 )
+Button/styles/normal = SubResource( 194 )
+Button/styles/pressed = SubResource( 194 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 500, 22, 126, 127 )
+
+[sub_resource type="AtlasTexture" id=192]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 352, 22, 126, 127 )
+
+[sub_resource type="AtlasTexture" id=193]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 982, 176, 126, 126 )
+
+[sub_resource type="AtlasTexture" id=211]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 910, 420, 145, 107 )
+
+[sub_resource type="StyleBoxFlat" id=187]
+bg_color = Color( 0.0588235, 0.0588235, 0.117647, 0.854902 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0, 0, 0, 0.764706 )
+corner_radius_top_left = 50
+corner_radius_top_right = 10
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 10
+expand_margin_top = 3.0
+
+[sub_resource type="Shader" id=186]
+code = "/*
+	動的電子背景シェーダー by あるる（きのもと 結衣） @arlez80
+	Procedural Electric Background Shader by Yui Kinomoto @arlez80
+
+	MIT License
+*/
+shader_type canvas_item;
+
+uniform vec4 background_color : hint_color = vec4( 0.0, 0.0, 0.0, 1.0 );
+uniform vec4 line_color : hint_color = vec4( 0.0, 1.0, 1.0, 1.0 );
+uniform float line_freq = 9.56;
+uniform float height = 0.6;
+uniform float speed = 0.8;
+uniform vec2 scale = vec2( 2.0, 16.0 );
+
+void fragment( )
+{
+	vec2 uv = UV * scale;
+	float shift = cos( floor( uv.y ) );
+	uv.x += shift;
+
+	float freq = clamp( cos( uv.x * line_freq ) * 3.0, 0.0, 1.0 ) * height;
+	float line = 1.0 - clamp( abs( freq - mod( uv.y, 1.0 ) ) * 11.0, 0.0, 1.0 );
+
+	COLOR = mix( background_color, line_color, line * mod( uv.x - TIME * speed * abs( shift ), 1.0 ) /*  * mod( TIME + shift, 1.0 ) */ );
+}"
+
+[sub_resource type="ShaderMaterial" id=188]
+shader = SubResource( 186 )
+shader_param/background_color = Color( 0, 0, 0, 0 )
+shader_param/line_color = Color( 0, 1, 1, 1 )
+shader_param/line_freq = 9.56
+shader_param/height = 0.6
+shader_param/speed = 0.8
+shader_param/scale = Vector2( 2, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1081, 358, 369, 187 )
+
+[sub_resource type="AtlasTexture" id=196]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 656, 22, 126, 127 )
+
+[sub_resource type="DynamicFont" id=191]
+size = 60
+outline_size = 4
+outline_color = Color( 0.956619, 0.772902, 0.256744, 1 )
+font_data = ExtResource( 10 )
+
+[sub_resource type="AtlasTexture" id=102]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 550, 730, 310, 390 )
+
+[sub_resource type="StyleBoxTexture" id=198]
+texture = SubResource( 102 )
+region_rect = Rect2( 0, 0, 310, 390 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Theme" id=199]
+Button/styles/disabled = SubResource( 10 )
+Button/styles/focus = SubResource( 10 )
+Button/styles/hover = SubResource( 10 )
+Button/styles/normal = SubResource( 10 )
+Button/styles/pressed = SubResource( 10 )
+
+[sub_resource type="AtlasTexture" id=200]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1273, 40, 126, 127 )
+
+[sub_resource type="DynamicFont" id=197]
+size = 60
+outline_size = 4
+outline_color = Color( 0.956863, 0.254902, 0.254902, 1 )
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=201]
+size = 17
+outline_size = 2
+outline_color = Color( 0.950241, 0.780846, 0.364417, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="AtlasTexture" id=203]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 490, 570, 470, 140 )
+
+[sub_resource type="StyleBoxTexture" id=204]
+texture = SubResource( 203 )
+region_rect = Rect2( 0, 0, 470, 140 )
+
+[sub_resource type="DynamicFont" id=205]
+size = 56
+font_data = ExtResource( 10 )
+
+[sub_resource type="StyleBoxFlat" id=206]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="AtlasTexture" id=202]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1429, 48, 130, 126 )
+
+[node name="EndlessMap" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bg_CanvasLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="ColorRect" type="ColorRect" parent="bg_CanvasLayer"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0117647, 0.0117647, 0.0117647, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="floors" type="Node2D" parent="."]
+
+[node name="Floor" parent="floors" instance=ExtResource( 1 )]
+position = Vector2( 48, 266 )
+use_random_type = false
+
+[node name="Floor2" parent="floors" instance=ExtResource( 1 )]
+position = Vector2( 576, 266 )
+use_random_type = false
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+light_mask = 0
+position = Vector2( 93, 181 )
+
+[node name="spawner" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1133, 150 )
+resource = ExtResource( 1 )
+use_timer = false
+
+[node name="Main_song" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 6 )
+autoplay = true
+bus = "Music"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="line_CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enable = true
+
+[node name="Touch_CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="touch_Control" type="Control" parent="Touch_CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left_touch" type="Panel" parent="Touch_CanvasLayer/touch_Control"]
+modulate = Color( 1, 0, 0, 1 )
+anchor_right = 0.503906
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 209 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Touch_CanvasLayer/touch_Control/left_touch"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left_touch_area2D" type="Area2D" parent="Touch_CanvasLayer/touch_Control/left_touch"]
+script = ExtResource( 13 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Touch_CanvasLayer/touch_Control/left_touch/left_touch_area2D"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 258, 300 )
+shape = SubResource( 207 )
+
+[node name="right_touch" type="Panel" parent="Touch_CanvasLayer/touch_Control"]
+modulate = Color( 0, 0.0352941, 1, 1 )
+anchor_left = 0.504141
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.240051
+mouse_filter = 2
+custom_styles/panel = SubResource( 210 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Touch_CanvasLayer/touch_Control/right_touch"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0666667, 0, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="right_touch_area2D" type="Area2D" parent="Touch_CanvasLayer/touch_Control/right_touch"]
+script = ExtResource( 13 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Touch_CanvasLayer/touch_Control/right_touch/right_touch_area2D"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 254, 300 )
+shape = SubResource( 208 )
+
+[node name="UI_CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+
+[node name="pause" type="Button" parent="UI_CanvasLayer"]
+pause_mode = 2
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 142.0
+margin_bottom = 135.0
+theme = SubResource( 11 )
+icon = SubResource( 12 )
+expand_icon = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="resume" type="Button" parent="UI_CanvasLayer"]
+pause_mode = 2
+visible = false
+margin_right = 126.0
+margin_bottom = 127.0
+theme = SubResource( 11 )
+icon = SubResource( 192 )
+expand_icon = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="settings" type="Button" parent="UI_CanvasLayer"]
+pause_mode = 2
+margin_left = 16.0
+margin_top = 152.0
+margin_right = 142.0
+margin_bottom = 278.0
+theme = SubResource( 11 )
+icon = SubResource( 193 )
+expand_icon = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="die" type="Button" parent="UI_CanvasLayer"]
+pause_mode = 2
+margin_left = 16.0
+margin_top = 280.0
+margin_right = 142.0
+margin_bottom = 406.0
+theme = SubResource( 11 )
+icon = SubResource( 211 )
+expand_icon = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pause" type="Panel" parent="UI_CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 262.0
+margin_top = 167.0
+margin_right = -263.0
+margin_bottom = -167.0
+custom_styles/panel = SubResource( 187 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="shader" type="Panel" parent="UI_CanvasLayer/Pause"]
+self_modulate = Color( 1, 1, 1, 0.329412 )
+material = SubResource( 188 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit" type="Button" parent="UI_CanvasLayer/Pause"]
+pause_mode = 2
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -313.0
+margin_top = -161.0
+margin_right = -40.0
+margin_bottom = -20.0
+theme = SubResource( 11 )
+icon = SubResource( 7 )
+expand_icon = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="restart" type="Button" parent="UI_CanvasLayer/Pause"]
+pause_mode = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = -158.0
+margin_right = 166.0
+margin_bottom = -32.0
+theme = SubResource( 11 )
+icon = SubResource( 196 )
+expand_icon = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="UI_CanvasLayer/Pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -128.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI_CanvasLayer/Pause/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI_CanvasLayer/Pause/Control/VBoxContainer"]
+margin_right = 499.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="paused" type="Label" parent="UI_CanvasLayer/Pause/Control/VBoxContainer"]
+margin_top = 24.0
+margin_right = 499.0
+margin_bottom = 97.0
+custom_fonts/font = SubResource( 191 )
+text = "PAUSED"
+align = 1
+
+[node name="game_over" type="Panel" parent="UI_CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 208.0
+margin_top = 33.0
+margin_right = -209.0
+margin_bottom = -33.0
+custom_styles/panel = SubResource( 187 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="shader" type="Panel" parent="UI_CanvasLayer/game_over"]
+self_modulate = Color( 1, 1, 1, 0.329412 )
+material = SubResource( 188 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel3" type="Panel" parent="UI_CanvasLayer/game_over"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -207.5
+margin_top = -231.0
+margin_right = 208.5
+margin_bottom = 135.0
+custom_styles/panel = SubResource( 198 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_settings" type="Button" parent="UI_CanvasLayer/game_over/Panel3"]
+visible = false
+margin_left = -32.0
+margin_top = -24.0
+margin_right = 94.0
+margin_bottom = 103.0
+theme = SubResource( 199 )
+icon = SubResource( 200 )
+expand_icon = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info_board" parent="UI_CanvasLayer/game_over/Panel3" instance=ExtResource( 8 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -154.5
+margin_top = -113.0
+margin_right = 202.5
+margin_bottom = 113.0
+
+[node name="exit" type="Button" parent="UI_CanvasLayer/game_over"]
+pause_mode = 2
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -289.0
+margin_top = -161.0
+margin_right = -16.0
+margin_bottom = -20.0
+theme = SubResource( 11 )
+icon = SubResource( 7 )
+expand_icon = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="restart" type="Button" parent="UI_CanvasLayer/game_over"]
+pause_mode = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = -158.0
+margin_right = 158.0
+margin_bottom = -32.0
+theme = SubResource( 11 )
+icon = SubResource( 196 )
+expand_icon = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="UI_CanvasLayer/game_over"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -128.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI_CanvasLayer/game_over/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI_CanvasLayer/game_over/Control/VBoxContainer"]
+margin_right = 607.0
+margin_bottom = 14.0
+
+[node name="game_over" type="Label" parent="UI_CanvasLayer/game_over/Control/VBoxContainer"]
+margin_top = 14.0
+margin_right = 607.0
+margin_bottom = 87.0
+custom_fonts/font = SubResource( 197 )
+text = "GAME OVER"
+align = 1
+
+[node name="new_high_score" type="Label" parent="UI_CanvasLayer/game_over/Control/VBoxContainer"]
+visible = false
+margin_top = 87.0
+margin_right = 607.0
+margin_bottom = 114.0
+custom_fonts/font = SubResource( 201 )
+text = "NEW HIGH_SCORE"
+align = 1
+
+[node name="InputName" type="Control" parent="UI_CanvasLayer/game_over"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UI_CanvasLayer/game_over/InputName"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -233.0
+margin_top = 56.0
+margin_right = 233.0
+margin_bottom = 164.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 204 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="input" type="LineEdit" parent="UI_CanvasLayer/game_over/InputName/Panel"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 16.0
+margin_right = -82.0
+margin_bottom = -16.0
+theme = SubResource( 11 )
+custom_fonts/font = SubResource( 205 )
+custom_styles/focus = SubResource( 206 )
+custom_styles/normal = SubResource( 206 )
+max_length = 12
+placeholder_text = "INPUT NAME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="inputName_ok" type="Button" parent="UI_CanvasLayer/game_over/InputName/Panel"]
+pause_mode = 2
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -74.0
+margin_top = -16.0
+margin_right = 56.0
+margin_bottom = 125.0
+theme = SubResource( 11 )
+icon = SubResource( 202 )
+expand_icon = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" parent="UI_CanvasLayer" instance=ExtResource( 9 )]
+visible = false
+margin_left = -195.5
+margin_right = 194.5
+
+[node name="Panel4" type="Panel" parent="UI_CanvasLayer/Settings"]
+modulate = Color( 0, 0, 0, 0.419608 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI_Info_display" parent="." instance=ExtResource( 12 )]
+
+[connection signal="gui_input" from="Touch_CanvasLayer/touch_Control/left_touch" to="." method="_on_left_touch_gui_input"]
+[connection signal="input_event" from="Touch_CanvasLayer/touch_Control/left_touch/left_touch_area2D" to="." method="_on_left_touch_area2D_input_event"]
+[connection signal="gui_input" from="Touch_CanvasLayer/touch_Control/right_touch" to="." method="_on_right_touch_gui_input"]
+[connection signal="input_event" from="Touch_CanvasLayer/touch_Control/right_touch/right_touch_area2D" to="." method="_on_right_touch_area2D_input_event"]
+[connection signal="pressed" from="UI_CanvasLayer/pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="UI_CanvasLayer/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="UI_CanvasLayer/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="UI_CanvasLayer/die" to="." method="_on_die_pressed"]
+[connection signal="pressed" from="UI_CanvasLayer/Pause/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="UI_CanvasLayer/Pause/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="UI_CanvasLayer/game_over/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="UI_CanvasLayer/game_over/restart" to="." method="_on_restart_pressed"]

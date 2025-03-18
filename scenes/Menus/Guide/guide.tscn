@@ -1,0 +1,150 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://fonts/Helvetica 700_WhatsApp.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/Menus/Settings/settings.gd" type="Script" id=2]
+[ext_resource path="res://imgs/Untitled81_20230728055503.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Menus/Button_script.gd" type="Script" id=5]
+
+[sub_resource type="AtlasTexture" id=102]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 550, 730, 310, 390 )
+
+[sub_resource type="StyleBoxTexture" id=103]
+texture = SubResource( 102 )
+region_rect = Rect2( 0, 0, 310, 390 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Theme" id=104]
+Button/styles/disabled = SubResource( 10 )
+Button/styles/focus = SubResource( 10 )
+Button/styles/hover = SubResource( 10 )
+Button/styles/normal = SubResource( 10 )
+Button/styles/pressed = SubResource( 10 )
+
+[sub_resource type="AtlasTexture" id=105]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 1273, 40, 126, 127 )
+
+[sub_resource type="StyleBoxFlat" id=100]
+bg_color = Color( 0, 0.996078, 0.94902, 0 )
+
+[sub_resource type="StyleBoxFlat" id=101]
+bg_color = Color( 0.00392157, 0.00392157, 0.00392157, 0 )
+border_width_left = 10
+border_color = Color( 0, 0, 0, 0.168627 )
+
+[sub_resource type="Theme" id=98]
+VScrollBar/styles/grabber = SubResource( 100 )
+VScrollBar/styles/grabber_highlight = SubResource( 101 )
+VScrollBar/styles/grabber_pressed = SubResource( 101 )
+VScrollBar/styles/scroll = SubResource( 101 )
+VScrollBar/styles/scroll_focus = SubResource( 101 )
+
+[sub_resource type="DynamicFont" id=106]
+size = 31
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=107]
+default_font = SubResource( 106 )
+Label/fonts/font = SubResource( 106 )
+
+[node name="Settings" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -195.0
+margin_top = -300.0
+margin_right = 195.0
+margin_bottom = 300.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -408.0
+color = Color( 0, 0, 0, 0.356863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel2" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.356863 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel3" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -282.0
+margin_top = -272.0
+margin_right = 283.0
+margin_bottom = 272.0
+custom_styles/panel = SubResource( 103 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back_settings" type="Button" parent="Panel3"]
+margin_left = -32.0
+margin_top = -24.0
+margin_right = 94.0
+margin_bottom = 103.0
+theme = SubResource( 104 )
+icon = SubResource( 105 )
+expand_icon = true
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings_ScrollContainer2" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 27.0
+margin_top = 98.0
+margin_right = -27.0
+margin_bottom = -98.0
+theme = SubResource( 98 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Settings_ScrollContainer2"]
+margin_right = 330.0
+margin_bottom = 872.0
+rect_min_size = Vector2( 330, 0 )
+theme = SubResource( 107 )
+text = "GUIDE:
+
+You have been equipped with the
+\"All For Running On (AFRO)\" Shoes !!!
+
+It gives the special ability to run on surfaces with the same color as the shoes.
+
+Controls:
+Tap the left or right part of the screen
+
+OR
+
+Use arrow key LEFT and RIGHT 
+to change to RED or BLUE colored shoes
+
+"
+autowrap = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_settings_visibility_changed"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Shallipopi_-_Sharpiru_Instrumental__africandjspool.com(perfectCut).mp3-77ac8e015b94975665b983cf28e83c89.mp3str"
+
+[deps]
+
+source_file="res://sounds/Shallipopi_-_Sharpiru_Instrumental__africandjspool.com(perfectCut).mp3"
+dest_files=[ "res://.import/Shallipopi_-_Sharpiru_Instrumental__africandjspool.com(perfectCut).mp3-77ac8e015b94975665b983cf28e83c89.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
